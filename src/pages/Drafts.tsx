@@ -1,4 +1,3 @@
-
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import DashboardLayout from "@/components/dashboard/DashboardLayout";
@@ -25,7 +24,6 @@ import {
 import { toast } from "sonner";
 import { ClipboardEdit, Filter, MoreHorizontal, Plus, RefreshCcw, Search, Trash2, SendHorizontal } from "lucide-react";
 
-// Mock drafts data
 const mockDrafts = [
   {
     id: "DRF-1001",
@@ -111,7 +109,6 @@ const Drafts = () => {
   const [selectedDraft, setSelectedDraft] = useState<string | null>(null);
   
   useEffect(() => {
-    // Simulate API fetch
     const fetchDrafts = async () => {
       try {
         await new Promise(resolve => setTimeout(resolve, 1200));
@@ -127,10 +124,8 @@ const Drafts = () => {
     fetchDrafts();
   }, []);
   
-  // Filter drafts
   const filteredDrafts = drafts
     .filter(draft => {
-      // Search filter
       if (searchQuery) {
         const query = searchQuery.toLowerCase();
         return (
@@ -142,7 +137,6 @@ const Drafts = () => {
       return true;
     })
     .filter(draft => {
-      // Status filter
       if (statusFilter !== "all") {
         return draft.status.toLowerCase().replace(" ", "-") === statusFilter;
       }
@@ -151,7 +145,6 @@ const Drafts = () => {
   
   const refreshDrafts = () => {
     setIsLoading(true);
-    // Simulate refresh
     setTimeout(() => {
       toast.success("Draft orders refreshed successfully");
       setIsLoading(false);
@@ -175,7 +168,6 @@ const Drafts = () => {
   
   const confirmDelete = () => {
     if (selectedDraft) {
-      // Simulate delete API call
       setDrafts(drafts.filter(draft => draft.id !== selectedDraft));
       toast.success(`Draft order ${selectedDraft} deleted successfully`);
       setDeleteDialogOpen(false);
@@ -239,7 +231,6 @@ const Drafts = () => {
           </CardHeader>
           <CardContent>
             <div className="space-y-4">
-              {/* Filters */}
               <div className="flex flex-col sm:flex-row gap-4">
                 <div className="relative flex-1">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
@@ -295,7 +286,6 @@ const Drafts = () => {
                 </div>
               </div>
               
-              {/* Drafts Table */}
               {isLoading ? (
                 <div className="space-y-2">
                   {[...Array(4)].map((_, i) => (
@@ -407,7 +397,6 @@ const Drafts = () => {
                 </div>
               )}
               
-              {/* Pagination would go here */}
               {!isLoading && filteredDrafts.length > 0 && (
                 <div className="flex items-center justify-between">
                   <div className="text-sm text-muted-foreground">
@@ -428,7 +417,6 @@ const Drafts = () => {
         </Card>
       </div>
       
-      {/* Delete confirmation dialog */}
       <Dialog open={deleteDialogOpen} onOpenChange={setDeleteDialogOpen}>
         <DialogContent className="sm:max-w-md">
           <DialogHeader>

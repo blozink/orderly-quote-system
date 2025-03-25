@@ -17,6 +17,7 @@ import ResetPassword from "./pages/ResetPassword";
 import Dashboard from "./pages/Dashboard";
 import Orders from "./pages/Orders";
 import Drafts from "./pages/Drafts";
+import DraftOrder from "./pages/DraftOrder";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -52,6 +53,11 @@ const App = () => (
             <Route path="/drafts" element={
               <ProtectedRoute>
                 <Drafts />
+              </ProtectedRoute>
+            } />
+            <Route path="/drafts/:draftId" element={
+              <ProtectedRoute>
+                <DraftOrder />
               </ProtectedRoute>
             } />
             
